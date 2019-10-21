@@ -9,10 +9,11 @@
         <module name="app-micro-servico-cliente" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel target="8" />
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="app-micro-servico-cliente" options="-parameters" />
+      <module name="app-micro-servico-cliente" options="" />
     </option>
   </component>
 </project>

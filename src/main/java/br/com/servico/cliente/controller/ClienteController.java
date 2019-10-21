@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("/cliente")
@@ -51,5 +52,10 @@ public class ClienteController {
     public ResponseEntity<String> ativarCliente(@PathVariable String email) throws IllegalArgumentException, UniqueException {
         clienteService.confirmaCadastro(email);
         return  ResponseEntity.ok("Ativação Feita com sucesso!");
+    }
+
+    @RequestMapping(value="/", method= RequestMethod.GET)
+    public RedirectView conusltaAPI() {
+        return new RedirectView("https://https://app-micro-servico-cliente.herokuapp.com/swagger-ui.html");
     }
 }

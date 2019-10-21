@@ -51,13 +51,7 @@ public class ClienteServiceImplTest {
         String retorno  = repo.deleteByEmail("Teste01@email.com");
         assertEquals("1", retorno);
     }
-    @Test
-    public void removerClienteErro() {
-        Cliente cli =  this.getCliente();
-        doReturn("0").when(repo).deleteByEmail(cli.getEmail());
-        String retorno  = repo.deleteByEmail("red01@email.com");
-        assertNotEquals("1", retorno);
-    }
+
 
     @Test
     public void findByEmail() {
@@ -68,24 +62,8 @@ public class ClienteServiceImplTest {
         assertNotNull(retorno);
 
     }
-    @Test
-    public void findByEmailErro() {
 
-        Cliente cli =  this.getCliente();
-        doReturn(cli).when(repo).findByEmail(cli.getEmail());
-        Cliente retorno = repo.findByEmail("red01@email.com");
-        assertNull(retorno);
 
-    }
-    @Test
-    public void findByEmailError() {
-
-        Cliente cli =  this.getCliente();
-        doReturn(cli).when(repo).findByEmail(cli.getEmail());
-        Cliente retorno = repo.findByEmail("red01@email.com");
-        assertNull(retorno);
-
-    }
     @Test
     public void isCadastradoTrue() {
         Cliente cli =  this.getCliente();

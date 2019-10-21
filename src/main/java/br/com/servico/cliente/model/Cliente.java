@@ -1,7 +1,6 @@
 package br.com.servico.cliente.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sun.javafx.beans.IDProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

@@ -4,6 +4,8 @@ import br.com.servico.cliente.dto.ClienteDTO;
 import br.com.servico.cliente.exceptions.UniqueException;
 import br.com.servico.cliente.model.Cliente;
 import br.com.servico.cliente.repository.ClienteRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +19,14 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository repo;
 
+    private static final Logger log = LogManager.getLogger(ClienteServiceImpl.class);
+
     /**
      * @param clienteDto
      * @return Cliente
      */
     public Cliente saveCliente(ClienteDTO clienteDto) {
-
+        log.info("$$$$$$ Start Save Cliente");
         ModelMapper modelMapper = new ModelMapper();
         Cliente cliente = modelMapper.map(clienteDto, Cliente.class);
         cliente.setAtivo(false);
@@ -33,8 +37,11 @@ public class ClienteServiceImpl implements ClienteService {
      * @param email
      */
     public void confirmaCadastro(String email) throws UniqueException {
+        log.info("$$$$$$ Start Confirma Cadastro");
         Cliente cliente = repo.findByEmail(email);
+
         if( this.isCadastrado(email,false)){
+            log.info("$$$$$$  Cliente Ja Ativado");
             throw new UniqueException("Cliente Já Ativo","Cliente Ativo", HttpStatus.OK);
         }else{
             cliente.setAtivo(true);
@@ -57,7 +64,9 @@ public class ClienteServiceImpl implements ClienteService {
      * @retunr void
      */
     public void removerCliente(String email) throws UniqueException {
+        log.info("$$$$$$ Remove Save Cliente");
         if( this.isCadastrado(email,false)){
+            log.error("$$$$$$ Erro ao Remover Cliente "+ email);
             throw new UniqueException("Cliente não pode ser alterado","Cliente Ativo", HttpStatus.SEE_OTHER);
          }else{
             repo.deleteByEmail(email);
@@ -87,8 +96,10 @@ public class ClienteServiceImpl implements ClienteService {
      * @return
      */
     public Cliente findByEmail(String email) throws UniqueException {
+        log.info("$$$$$$ Start Buscar Cliente por Email");
 
           if( this.isCadastrado(email,false)){
+              log.error("$$$$$$ Cliente não pode ser alterado.");
                throw new UniqueException("Cliente não pode ser alterado","Cliente Ativo", HttpStatus.SEE_OTHER);
            }else{
                return repo.findByEmail(email);

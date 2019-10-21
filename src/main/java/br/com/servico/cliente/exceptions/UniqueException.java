@@ -16,6 +16,8 @@ public class UniqueException extends Exception {
         this.titulo = titulo;
         this.httpStatus = httpStatus;
     }
+    public UniqueException() {
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

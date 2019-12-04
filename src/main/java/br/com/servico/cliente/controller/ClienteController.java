@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping
 public class ClienteController {
 
 
@@ -21,14 +21,14 @@ public class ClienteController {
     private ClienteService clienteService;
 
 
-    @PutMapping("/add")
+    @PutMapping("/cliente/add")
     @ResponseBody
     public ResponseEntity<Cliente> addCliente(@RequestBody ClienteDTO cliente) throws IllegalArgumentException, ValidaCamposException {
         Cliente userOk = clienteService.saveCliente(cliente);
         return ResponseEntity.status(HttpStatus.OK).body(userOk);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/cliente/update")
     @ResponseBody
     public ResponseEntity<Cliente> updateCliente(@RequestBody Cliente cliente) throws IllegalArgumentException, ValidaCamposException {
         Cliente userOk = clienteService.updateCliente(cliente);
@@ -36,19 +36,19 @@ public class ClienteController {
     }
 
 
-    @DeleteMapping("/remove/{email}")
+    @DeleteMapping("/cliente/remove/{email}")
     public ResponseEntity<String> removeCliente(@PathVariable String email) throws UniqueException {
          clienteService.removerCliente(email);
          return  ResponseEntity.ok("Cliente Excluido com Sucesso!");
     }
 
-    @GetMapping("/search/{email}")
+    @GetMapping("/cliente/search/{email}")
     public ResponseEntity<Cliente> searchCliente(@PathVariable String email) throws IllegalArgumentException, UniqueException {
         Cliente userOk = clienteService.findByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(userOk);
     }
 
-    @GetMapping("/ativar/{email}")
+    @GetMapping("/cliente/ativar/{email}")
     public ResponseEntity<String> ativarCliente(@PathVariable String email) throws IllegalArgumentException, UniqueException {
         clienteService.confirmaCadastro(email);
         return  ResponseEntity.ok("Ativação Feita com sucesso!");

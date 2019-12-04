@@ -53,5 +53,10 @@ public class ClienteController {
         clienteService.confirmaCadastro(email);
         return  ResponseEntity.ok("Ativação Feita com sucesso!");
     }
+    
+    @RequestMapping(value="/", method= RequestMethod.GET)
+	 public RedirectView conusltaAPI() {
+	    return new RedirectView("https://app-micro-servico-cliente.herokuapp.com/swagger-ui.html");
+	}
 
 }

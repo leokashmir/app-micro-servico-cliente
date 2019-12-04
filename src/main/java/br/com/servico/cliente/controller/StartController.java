@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping
 public class StartController {
 
     @RequestMapping(value="/", method= RequestMethod.GET)

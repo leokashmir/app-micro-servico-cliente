@@ -2,7 +2,7 @@
 ## Application
 > A simple Exemple API-REST With Heroku Cloud, SpringBoot and MongoDb
 
-## App Acesses 
+## App Access 
 > https://app-micro-servico-cliente.herokuapp.com/swagger-ui.html
  
  
